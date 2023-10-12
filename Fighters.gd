@@ -18,3 +18,11 @@ func _on_simulation_play_state_changed(state):
 		#Si le fighter existe, qu'il n'a pas été détruit
 		if all_fighters[i].is_in_group("fighter"):
 			all_fighters[i].isPlaying = state
+
+
+func _on_simulation_strat_changed(newStrat, joueur):
+	var all_fighters = get_children()
+	for i in range(0, all_fighters.size()):
+		#Si le fighter existe, qu'il n'a pas été détruit
+		if all_fighters[i].is_in_group("fighter") && all_fighters[i].team == joueur:
+			all_fighters[i].strat = newStrat

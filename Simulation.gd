@@ -13,6 +13,8 @@ var VboxLabels1
 var VboxLabels2
 var VBoxButtons1
 var VBoxButtons2
+var VBoxStrat1
+var VBoxStrat2
 var subViewport
 var btnPlay
 var finished = false
@@ -26,9 +28,13 @@ enum Strat{
 var strategieJ1 = Strat.AttaqueFrontale
 var strategieJ2 = Strat.AttaqueFrontale
 
+signal stratChanged(newStrat, joueur)
+
 #Tableau de caméras
 var camera = []
 var cameraActive = 4 #indice de la caméra active
+
+var currentStrat = 1 #Stratégie active
 
 #Initialisation des variables, la fonction peut être appelée pour relancer une partie
 func init():
@@ -60,6 +66,9 @@ func _ready():
 	
 	VBoxButtons1 = subViewport.get_node("VBoxButtonsPlayer1")
 	VBoxButtons2 = subViewport.get_node("VBoxButtonsPlayer2")
+	
+	VBoxStrat1 = subViewport.get_node("VBoxStratPlayer1")
+	VBoxStrat2 = subViewport.get_node("VBoxStratPlayer2")
 	
 	btnPlay = subViewport.get_node("Play")
 	
@@ -93,6 +102,11 @@ func _process(delta):
 		btnPlay.text = "Pause"
 		
 	
+	#On change de couleur les boutons de stratégie qui ne sont pas sélectionnés
+	#if strategieJ1 == 1:
+		#VBoxStrat1.get_node("ChoixStrat1").color = Color(0,0,0)
+		
+	
 	#Gérer les boutons d'ajout de troupe
 	if(isPlaying):
 		VBoxButtons1.get_node("AddFighter1").disabled = true
@@ -105,6 +119,13 @@ func _process(delta):
 		VBoxButtons2.get_node("AddWizard2").disabled = true
 		VBoxButtons2.get_node("AddTank2").disabled = true
 		
+		
+		
+		VBoxStrat1.get_node("ChoixStrat1").disabled = true
+		VBoxStrat1.get_node("ChoixStrat2").disabled = true
+		VBoxStrat1.get_node("ChoixStrat3").disabled = true
+		VBoxStrat1.get_node("ChoixStrat4").disabled = true
+		
 	else:
 		VBoxButtons1.get_node("AddFighter1").disabled = false
 		VBoxButtons1.get_node("AddChief1").disabled = false
@@ -115,6 +136,19 @@ func _process(delta):
 		VBoxButtons2.get_node("AddChief2").disabled = false
 		VBoxButtons2.get_node("AddWizard2").disabled = false
 		VBoxButtons2.get_node("AddTank2").disabled = false
+		
+		
+		if nbFighters1 > 0 && nbFighters2 > 0:
+			VBoxStrat1.get_node("ChoixStrat1").disabled = false
+			VBoxStrat1.get_node("ChoixStrat2").disabled = true
+			VBoxStrat1.get_node("ChoixStrat3").disabled = false
+			VBoxStrat1.get_node("ChoixStrat4").disabled = false
+		else:
+			VBoxStrat1.get_node("ChoixStrat1").disabled = true
+			VBoxStrat1.get_node("ChoixStrat2").disabled = true
+			VBoxStrat1.get_node("ChoixStrat3").disabled = true
+			VBoxStrat1.get_node("ChoixStrat4").disabled = true
+			
 
 func _input(event):
 	if event.is_action_released("ChangeCameraPlus"):
@@ -138,29 +172,33 @@ func createFighter(team,type):
 	
 	#On définit ses stats selon son type
 	if type == 1: #Simple soldat
-		fighter1.hp = 2
-		fighter1.dmg = 1
-		fighter1.detectZoneRadius = 5.0
-		fighter1.distToFire = 3;
+		fighter1.hp = 30.0
+		fighter1.dmg = 1.0
+		fighter1.detectZoneRadius = 0.0
+		fighter1.distToFire = 3
 		fighter1.type = 1
+		fighter1.speed = 0.0
 	elif type == 2: #Chef
-		fighter1.hp = 3
-		fighter1.dmg = 2
+		fighter1.hp = 3.0
+		fighter1.dmg = 1.0
 		fighter1.detectZoneRadius = 30.0
-		fighter1.distToFire = 20;
+		fighter1.distToFire = 20
 		fighter1.type = 2
+		fighter1.speed = 0.5
 	elif type == 3: #Sorcier
-		fighter1.hp = 2
-		fighter1.dmg = 2
-		fighter1.detectZoneRadius = 15.0
-		fighter1.distToFire = 15;
+		fighter1.hp = 2.0
+		fighter1.dmg = 2.0
+		fighter1.detectZoneRadius = 1.0
+		fighter1.distToFire = 2
 		fighter1.type = 3
+		fighter1.speed = 0.5
 	elif type == 4: #Tank
-		fighter1.hp = 3
-		fighter1.dmg = 3
+		fighter1.hp = 3.0
+		fighter1.dmg = 3.0
 		fighter1.detectZoneRadius = 25.0
-		fighter1.distToFire = 15;
+		fighter1.distToFire = 15
 		fighter1.type = 4
+		fighter1.speed = 0.5
 	
 	# Décrémenter les jetons et positionner le combattant avant de l'ajouter
 	if team == 1: # Equipe 1
@@ -237,7 +275,6 @@ func _on_add_tank_2_pressed():
 
 
 func _on_play_pressed():
-	
 	if(!isPlaying && nbFighters1>0 && nbFighters2>0):
 		isPlaying = true
 		playStateChanged.emit(isPlaying)
@@ -246,3 +283,27 @@ func _on_play_pressed():
 		playStateChanged.emit(isPlaying)
 	else:
 		init()
+
+
+func _on_choix_strat_1_pressed():
+	strategieJ1 = Strat.AttaqueFrontale
+	stratChanged.emit(strategieJ1,1)
+	currentStrat = 1
+
+
+func _on_choix_strat_2_pressed():
+	strategieJ1 = Strat.Evolution
+	stratChanged.emit(strategieJ1,1)
+	currentStrat = 2
+
+
+func _on_choix_strat_3_pressed():
+	strategieJ1 = Strat.Fuite
+	stratChanged.emit(strategieJ1,1)
+	currentStrat = 3
+
+
+func _on_choix_strat_4_pressed():
+	strategieJ1 = Strat.ViveLeChef
+	stratChanged.emit(strategieJ1,1)
+	currentStrat = 4

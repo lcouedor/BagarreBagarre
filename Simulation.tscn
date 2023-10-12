@@ -78,6 +78,36 @@ label_settings = SubResource("LabelSettings_diiha")
 layout_mode = 2
 label_settings = SubResource("LabelSettings_c7vd1")
 
+[node name="VBoxStratPlayer1" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -68.0
+offset_right = 194.0
+offset_bottom = 68.0
+grow_vertical = 2
+
+[node name="ChoixStrat1" type="Button" parent="SubViewportContainer/SubViewport/VBoxStratPlayer1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Attaque frontale"
+
+[node name="ChoixStrat2" type="Button" parent="SubViewportContainer/SubViewport/VBoxStratPlayer1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+disabled = true
+text = "Evolution (coming soon)"
+
+[node name="ChoixStrat3" type="Button" parent="SubViewportContainer/SubViewport/VBoxStratPlayer1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Fuite"
+
+[node name="ChoixStrat4" type="Button" parent="SubViewportContainer/SubViewport/VBoxStratPlayer1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Vive le chef"
+
 [node name="VBoxButtonsPlayer1" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
 anchors_preset = 2
 anchor_top = 1.0
@@ -193,6 +223,11 @@ theme_override_font_sizes/font_size = 60
 text = "Jouter"
 
 [connection signal="playStateChanged" from="." to="Fighters" method="_on_simulation_play_state_changed"]
+[connection signal="stratChanged" from="." to="Fighters" method="_on_simulation_strat_changed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxStratPlayer1/ChoixStrat1" to="." method="_on_choix_strat_1_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxStratPlayer1/ChoixStrat2" to="." method="_on_choix_strat_2_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxStratPlayer1/ChoixStrat3" to="." method="_on_choix_strat_3_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxStratPlayer1/ChoixStrat4" to="." method="_on_choix_strat_4_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddFighter1" to="." method="_on_add_fighter_1_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddChief1" to="." method="_on_add_chief_1_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddWizard1" to="." method="_on_add_wizard_1_pressed"]
