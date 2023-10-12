@@ -190,7 +190,7 @@ offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 60
-text = "Lancer la simulation"
+text = "Jouter"
 
 [connection signal="playStateChanged" from="." to="Fighters" method="_on_simulation_play_state_changed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddFighter1" to="." method="_on_add_fighter_1_pressed"]

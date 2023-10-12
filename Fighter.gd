@@ -104,13 +104,15 @@ func setSkin():
 
 # Appelé à chaque frame, delta est le temps écoulé depuis la dernière frame
 func _process(delta):
-	if !isPlaying : return # Si la simulation n'est pas lancée, on ne fait rien	
-	
 	#Si le combattant n'a plus de vie, il meurt
 	if hp<=0:
 		isDead()
 		return
-
+		
+	if !isPlaying : 
+		apply_central_impulse(Vector3.ZERO)
+		return # Si la simulation n'est pas lancée, on ne fait rien	
+	
 	#Si le combattant n'a pas de cible, il explore
 	if state == Etat.Exploring:
 		timer += delta

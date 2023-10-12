@@ -15,6 +15,16 @@ var VBoxButtons1
 var VBoxButtons2
 var subViewport
 var btnPlay
+var finished = false
+
+enum Strat{
+	AttaqueFrontale,
+	Evolution,
+	Fuite,
+	ViveLeChef,
+}
+var strategieJ1 = Strat.AttaqueFrontale
+var strategieJ2 = Strat.AttaqueFrontale
 
 #Tableau de caméras
 var camera = []
@@ -22,7 +32,9 @@ var cameraActive = 4 #indice de la caméra active
 
 #Initialisation des variables, la fonction peut être appelée pour relancer une partie
 func init():
+	finished = false
 	isPlaying = false
+	btnPlay.text = "Jouter"
 	# On supprime tous les combattants
 	var fighters = get_node("Fighters").get_children()
 	for fighter in fighters:
@@ -72,10 +84,13 @@ func _process(delta):
 	VboxLabels1.get_node("NbFighters1").text = "Combattants joueur 1 : " + str(nbFighters1)
 	VboxLabels2.get_node("NbFighters2").text = "Combattants joueur 2 : " + str(nbFighters2)
 	
-	if(!isPlaying && (nbFighters1 == 0 || nbFighters2 == 0)): #On ne peut pas lancer la simulation
+	if(!isPlaying && (nbFighters1 == 0 || nbFighters2 == 0) && !finished): #Les combattants n'ont pas été choisis, on ne peut pas lancer
 		btnPlay.disabled = true
-	elif(!isPlaying && nbFighters1 > 0 && nbFighters2 > 0): #On peut lancer
+	elif(!isPlaying && nbFighters1 > 0 && nbFighters2 > 0): #Les équipes sont faites, on peut se battre
+		btnPlay.text = "Jouter"
 		btnPlay.disabled = false
+	elif(isPlaying): #On peut mettre sur pause
+		btnPlay.text = "Pause"
 		
 	
 	#Gérer les boutons d'ajout de troupe
@@ -111,13 +126,6 @@ func _input(event):
 		camera[cameraActive].current = false
 		cameraActive = (cameraActive-1)%len(camera)
 		camera[cameraActive].current = true
-		
-	if event.is_action_released("Play"):
-		if(!isPlaying && nbFighters1>0 && nbFighters2>0):
-			isPlaying = true
-			playStateChanged.emit(isPlaying)
-		else:
-			init()
 
 # Créer un combattant avec ses stats et infos
 func createFighter(team,type):
@@ -181,18 +189,19 @@ func fighterDead(team):
 	elif team == 2:
 		nbFighters2-=1
 		
+	if nbFighters1 == 0 || nbFighters2 == 0:
+		btnPlay.text = "Le conflit reprend"
+		finished = true
+		btnPlay.disabled = false
+		isPlaying = false
+		playStateChanged.emit(isPlaying)
+		
 	if nbFighters1 > 0 && nbFighters2 == 0:
 		subViewport.get_node("Winner").text = "Bravo joueur 1, tu as fièrement défendu tes terres"
-		isPlaying = false
-		playStateChanged.emit(isPlaying)
 	elif nbFighters2 > 0 && nbFighters1 == 0:
 		subViewport.get_node("Winner").text = "Bravo joueur 2, tu as fièrement défendu tes terres"
-		isPlaying = false
-		playStateChanged.emit(isPlaying)
 	elif nbFighters1 == 0 && nbFighters2 == 0:
 		subViewport.get_node("Winner").text = "On dirait que vous méritez tous les deux vos terres"
-		isPlaying = false
-		playStateChanged.emit(isPlaying)
 
 
 func _on_add_fighter_1_pressed():
@@ -228,8 +237,12 @@ func _on_add_tank_2_pressed():
 
 
 func _on_play_pressed():
+	
 	if(!isPlaying && nbFighters1>0 && nbFighters2>0):
 		isPlaying = true
+		playStateChanged.emit(isPlaying)
+	elif(isPlaying):
+		isPlaying = false;
 		playStateChanged.emit(isPlaying)
 	else:
 		init()
