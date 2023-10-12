@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cyommnc1me1wg"
+path="res://.godot/imported/MountainLarge_Single.obj-ea53f68400c629ca3657b4da280a494a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/MountainLarge_Single.obj-ea53f68400c629ca3657b4da280a494a.mesh"]
+
+source_file="res://assets/environment/Mountains/MountainLarge_Single.obj"
+dest_files=["res://.godot/imported/MountainLarge_Single.obj-ea53f68400c629ca3657b4da280a494a.mesh", "res://.godot/imported/MountainLarge_Single.obj-ea53f68400c629ca3657b4da280a494a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

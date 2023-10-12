@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://djgwt5p1mtnn5"
+path="res://.godot/imported/Chef_Male.obj-11536e420f3e6c34c79c43754ec0d00b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Chef_Male.obj-11536e420f3e6c34c79c43754ec0d00b.mesh"]
+
+source_file="res://assets/characters/Chef_Male.obj"
+dest_files=["res://.godot/imported/Chef_Male.obj-11536e420f3e6c34c79c43754ec0d00b.mesh", "res://.godot/imported/Chef_Male.obj-11536e420f3e6c34c79c43754ec0d00b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

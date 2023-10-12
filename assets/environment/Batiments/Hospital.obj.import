@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c4d6wvl0lwhhj"
+path="res://.godot/imported/Hospital.obj-f18123d4f3c43063db96bd4b52165064.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Hospital.obj-f18123d4f3c43063db96bd4b52165064.mesh"]
+
+source_file="res://assets/environment/Batiments/Hospital.obj"
+dest_files=["res://.godot/imported/Hospital.obj-f18123d4f3c43063db96bd4b52165064.mesh", "res://.godot/imported/Hospital.obj-f18123d4f3c43063db96bd4b52165064.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

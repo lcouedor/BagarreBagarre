@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dd4n7mj7ud1bx"
+path="res://.godot/imported/Wizard.obj-e0625f9dc32e040fdbc2c5dd03d0a01b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wizard.obj-e0625f9dc32e040fdbc2c5dd03d0a01b.mesh"]
+
+source_file="res://assets/characters/Wizard.obj"
+dest_files=["res://.godot/imported/Wizard.obj-e0625f9dc32e040fdbc2c5dd03d0a01b.mesh", "res://.godot/imported/Wizard.obj-e0625f9dc32e040fdbc2c5dd03d0a01b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

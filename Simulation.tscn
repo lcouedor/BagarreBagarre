@@ -1,0 +1,204 @@
+[gd_scene load_steps=9 format=3 uid="uid://by4my8rgy7vwg"]
+
+[ext_resource type="Script" path="res://Simulation.gd" id="1_2xixy"]
+[ext_resource type="PackedScene" uid="uid://ccuttxeb3dsyw" path="res://Environnement.tscn" id="1_jnvrg"]
+[ext_resource type="Script" path="res://Fighters.gd" id="3_joy0j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_diiha"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_c7vd1"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_74om6"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_didgb"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_coxc5"]
+font_size = 100
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Simulation" type="Node3D"]
+script = ExtResource("1_2xixy")
+
+[node name="Caméras" type="Node3D" parent="."]
+
+[node name="Camera1" type="Camera3D" parent="Caméras"]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 25, 13, 67)
+
+[node name="Camera2" type="Camera3D" parent="Caméras"]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 67, 13, 25)
+current = true
+
+[node name="Camera3" type="Camera3D" parent="Caméras"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, -1.5246e-23, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 25, 200, 25)
+current = true
+
+[node name="Camera4" type="Camera3D" parent="Caméras"]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 3.02058e-16, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 49, 11, 48)
+current = true
+
+[node name="Camera5" type="Camera3D" parent="Caméras"]
+transform = Transform3D(-0.707107, -0.353553, 0.612372, 3.02058e-16, 0.866025, 0.5, -0.707107, 0.353553, -0.612372, 49, 11, 2)
+current = true
+
+[node name="Camera6" type="Camera3D" parent="Caméras"]
+transform = Transform3D(0.980271, 0.0730832, -0.18365, 3.24069e-16, 0.929133, 0.369747, 0.197657, -0.362452, 0.910802, -34.917, 6.432, 32.84)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 25, 45, 25)
+
+[node name="Environnement" parent="." instance=ExtResource("1_jnvrg")]
+
+[node name="Fighters" type="Node3D" parent="."]
+script = ExtResource("3_joy0j")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="VBoxTextPlayer1" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
+offset_right = 193.0
+offset_bottom = 310.0
+
+[node name="JetonsPlayer1" type="Label" parent="SubViewportContainer/SubViewport/VBoxTextPlayer1"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_diiha")
+
+[node name="NbFighters1" type="Label" parent="SubViewportContainer/SubViewport/VBoxTextPlayer1"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_c7vd1")
+
+[node name="VBoxButtonsPlayer1" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+offset_right = 193.0
+grow_vertical = 0
+
+[node name="AddFighter1" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer1"]
+layout_mode = 2
+tooltip_text = "Il est basique. Simple. Bouhh le normal. (Il coûte 1 jeton)"
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un combattant"
+
+[node name="AddChief1" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer1"]
+layout_mode = 2
+tooltip_text = "Un oeil de faucon qui crie \"ara-ara\" quand il voit des ennemis. Il coûte 2 jetons."
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un chef"
+
+[node name="AddWizard1" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer1"]
+layout_mode = 2
+tooltip_text = "Le chaman possède la compétence \"lancer de poule\" au niveau max, en gros il lance de très loin. Ouais. Et il coûte 3 jetons aussi."
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un chaman"
+
+[node name="AddTank1" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer1"]
+layout_mode = 2
+tooltip_text = "Une force de T-Rex avec la vitesse d'une tortue et la vue d'une taupe. Il coûte 4 unités."
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un gros balourd"
+
+[node name="VBoxTextPlayer2" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -193.0
+offset_bottom = 170.0
+grow_horizontal = 0
+
+[node name="JetonsPlayer2" type="Label" parent="SubViewportContainer/SubViewport/VBoxTextPlayer2"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_74om6")
+horizontal_alignment = 2
+
+[node name="NbFighters2" type="Label" parent="SubViewportContainer/SubViewport/VBoxTextPlayer2"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_didgb")
+horizontal_alignment = 2
+
+[node name="VBoxButtonsPlayer2" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -193.0
+offset_top = -136.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="AddFighter2" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer2"]
+layout_mode = 2
+tooltip_text = "Il est basique. Simple. Bouhh le normal. (Il coûte 1 jeton)"
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un combattant"
+
+[node name="AddChief2" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer2"]
+layout_mode = 2
+tooltip_text = "Un oeil de faucon qui crie \"ara-ara\" quand il voit des ennemis. Il coûte 2 jetons."
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un chef"
+
+[node name="AddWizard2" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer2"]
+layout_mode = 2
+tooltip_text = "Le chaman possède la compétence \"lancer de poule\" au niveau max, en gros il lance de très loin. Ouais. Et il coûte 3 jetons aussi."
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un chaman"
+
+[node name="AddTank2" type="Button" parent="SubViewportContainer/SubViewport/VBoxButtonsPlayer2"]
+layout_mode = 2
+tooltip_text = "Une force de T-Rex avec la vitesse d'une tortue et la vue d'une taupe. Il coûte 4 unités."
+theme_override_font_sizes/font_size = 60
+text = "Ajouter un gros balourd"
+
+[node name="Winner" type="Label" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "test"
+label_settings = SubResource("LabelSettings_coxc5")
+
+[node name="Play" type="Button" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Lancer la simulation"
+
+[connection signal="playStateChanged" from="." to="Fighters" method="_on_simulation_play_state_changed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddFighter1" to="." method="_on_add_fighter_1_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddChief1" to="." method="_on_add_chief_1_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddWizard1" to="." method="_on_add_wizard_1_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer1/AddTank1" to="." method="_on_add_tank_1_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer2/AddFighter2" to="." method="_on_add_fighter_2_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer2/AddChief2" to="." method="_on_add_chief_2_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer2/AddWizard2" to="." method="_on_add_wizard_2_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/VBoxButtonsPlayer2/AddTank2" to="." method="_on_add_tank_2_pressed"]
+[connection signal="pressed" from="SubViewportContainer/SubViewport/Play" to="." method="_on_play_pressed"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csco3hey7gla7"
+path="res://.godot/imported/Street_3Way_2.obj-19d1314aca4ee47fe89356e1ca0c2edf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Street_3Way_2.obj-19d1314aca4ee47fe89356e1ca0c2edf.mesh"]
+
+source_file="res://assets/environment/road/Street_3Way_2.obj"
+dest_files=["res://.godot/imported/Street_3Way_2.obj-19d1314aca4ee47fe89356e1ca0c2edf.mesh", "res://.godot/imported/Street_3Way_2.obj-19d1314aca4ee47fe89356e1ca0c2edf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

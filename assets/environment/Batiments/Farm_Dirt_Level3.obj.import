@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cj3uvpt50dgt5"
+path="res://.godot/imported/Farm_Dirt_Level3.obj-acadf4cda319735174fb999b1ce05191.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Farm_Dirt_Level3.obj-acadf4cda319735174fb999b1ce05191.mesh"]
+
+source_file="res://assets/environment/Batiments/Farm_Dirt_Level3.obj"
+dest_files=["res://.godot/imported/Farm_Dirt_Level3.obj-acadf4cda319735174fb999b1ce05191.mesh", "res://.godot/imported/Farm_Dirt_Level3.obj-acadf4cda319735174fb999b1ce05191.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

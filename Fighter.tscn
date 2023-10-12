@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3 uid="uid://r5mcw4i2v5ij"]
+
+[ext_resource type="Script" path="res://Fighter.gd" id="1_8nbqj"]
+[ext_resource type="ArrayMesh" uid="uid://dl1tkd0aww5g8" path="res://assets/characters/Worker_Female.obj" id="2_n2qng"]
+[ext_resource type="AudioStream" uid="uid://diat0rs52mns2" path="res://assets/sound/bruitPoule.mp3" id="3_fnr4u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kykwb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngkxh"]
+albedo_color = Color(1, 0.729412, 0.729412, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jff4f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctqxa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kcan0"]
+albedo_color = Color(1, 0.560784, 0.560784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqfdv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xl5u0"]
+height = 0.001
+radius = 5.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qgvfe"]
+top_radius = 5.0
+height = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic0ll"]
+albedo_color = Color(1, 0.435294, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8vyf5"]
+
+[node name="Fighter" type="RigidBody3D" groups=["fighter"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.493, 0, 16.9143)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+linear_damp = 10.0
+script = ExtResource("1_8nbqj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
+shape = SubResource("BoxShape3D_kykwb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_n2qng")
+surface_material_override/0 = SubResource("StandardMaterial3D_ngkxh")
+surface_material_override/2 = SubResource("StandardMaterial3D_jff4f")
+surface_material_override/3 = SubResource("StandardMaterial3D_ctqxa")
+surface_material_override/4 = SubResource("StandardMaterial3D_kcan0")
+surface_material_override/5 = SubResource("StandardMaterial3D_eqfdv")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_xl5u0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+visible = false
+mesh = SubResource("CylinderMesh_qgvfe")
+surface_material_override/0 = SubResource("StandardMaterial3D_ic0ll")
+
+[node name="Area3D2" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("BoxShape3D_8vyf5")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_fnr4u")
+attenuation_model = 3
+
+[connection signal="dead" from="." to="." method="_on_dead"]
+[connection signal="inZoneChanged" from="." to="." method="_on_in_zone_changed"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="child_entered_tree" from="Area3D/CollisionShape3D" to="." method="_on_collision_shape_3d_child_entered_tree"]
+[connection signal="area_entered" from="Area3D2" to="." method="_on_area_3d_2_area_entered"]

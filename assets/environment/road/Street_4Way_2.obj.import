@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dt6xj5k8qyntb"
+path="res://.godot/imported/Street_4Way_2.obj-8f088e85530cae291b96804bf3b32186.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Street_4Way_2.obj-8f088e85530cae291b96804bf3b32186.mesh"]
+
+source_file="res://assets/environment/road/Street_4Way_2.obj"
+dest_files=["res://.godot/imported/Street_4Way_2.obj-8f088e85530cae291b96804bf3b32186.mesh", "res://.godot/imported/Street_4Way_2.obj-8f088e85530cae291b96804bf3b32186.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

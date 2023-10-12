@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dqmih76nmvwn"
+path="res://.godot/imported/Worker_Male.obj-a268ec3e61b7485bdf6d5be5e984e8dc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Worker_Male.obj-a268ec3e61b7485bdf6d5be5e984e8dc.mesh"]
+
+source_file="res://assets/characters/Worker_Male.obj"
+dest_files=["res://.godot/imported/Worker_Male.obj-a268ec3e61b7485bdf6d5be5e984e8dc.mesh", "res://.godot/imported/Worker_Male.obj-a268ec3e61b7485bdf6d5be5e984e8dc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ypj8olad2niu"
+path="res://.godot/imported/Silo_House.obj-bae0b2baaab39c4a192aaeda2a4e4255.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Silo_House.obj-bae0b2baaab39c4a192aaeda2a4e4255.mesh"]
+
+source_file="res://assets/environment/Batiments/Silo_House.obj"
+dest_files=["res://.godot/imported/Silo_House.obj-bae0b2baaab39c4a192aaeda2a4e4255.mesh", "res://.godot/imported/Silo_House.obj-bae0b2baaab39c4a192aaeda2a4e4255.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

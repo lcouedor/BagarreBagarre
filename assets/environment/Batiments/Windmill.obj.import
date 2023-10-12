@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d3dnwyj6tgf5q"
+path="res://.godot/imported/Windmill.obj-0ba9bea113a6b40a80aaf3a066d443dc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Windmill.obj-0ba9bea113a6b40a80aaf3a066d443dc.mesh"]
+
+source_file="res://assets/environment/Batiments/Windmill.obj"
+dest_files=["res://.godot/imported/Windmill.obj-0ba9bea113a6b40a80aaf3a066d443dc.mesh", "res://.godot/imported/Windmill.obj-0ba9bea113a6b40a80aaf3a066d443dc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
