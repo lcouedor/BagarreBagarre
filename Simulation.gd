@@ -32,9 +32,10 @@ signal stratChanged(newStrat, joueur)
 
 #Tableau de caméras
 var camera = []
-var cameraActive = 4 #indice de la caméra active
+var cameraActive = 0 #indice de la caméra active
 
-var currentStrat = 1 #Stratégie active
+var currentStratJ1 = 1 #Stratégie active
+var currentStratJ2 = 1
 
 #Initialisation des variables, la fonction peut être appelée pour relancer une partie
 func init():
@@ -103,8 +104,47 @@ func _process(delta):
 		
 	
 	#On change de couleur les boutons de stratégie qui ne sont pas sélectionnés
-	#if strategieJ1 == 1:
-		#VBoxStrat1.get_node("ChoixStrat1").color = Color(0,0,0)
+	if strategieJ1 == Strat.AttaqueFrontale:
+		VBoxStrat1.get_node("ChoixStrat1").modulate = Color(0.53, 0.81, 0.92)
+		VBoxStrat1.get_node("ChoixStrat2").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat3").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat4").modulate = Color(1,1,1)
+	elif strategieJ1 == Strat.Evolution:
+		VBoxStrat1.get_node("ChoixStrat1").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat2").modulate = Color(0.53, 0.81, 0.92)
+		VBoxStrat1.get_node("ChoixStrat3").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat4").modulate = Color(1,1,1)
+	elif strategieJ1 == Strat.Fuite:
+		VBoxStrat1.get_node("ChoixStrat1").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat2").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat3").modulate = Color(0.53, 0.81, 0.92)
+		VBoxStrat1.get_node("ChoixStrat4").modulate = Color(1,1,1)
+	elif strategieJ1 == Strat.ViveLeChef:
+		VBoxStrat1.get_node("ChoixStrat1").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat2").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat3").modulate = Color(1,1,1)
+		VBoxStrat1.get_node("ChoixStrat4").modulate = Color(0.53, 0.81, 0.92)
+		
+	if strategieJ2 == Strat.AttaqueFrontale:
+		VBoxStrat2.get_node("ChoixStrat1_2").modulate = Color(0.53, 0.81, 0.92)
+		VBoxStrat2.get_node("ChoixStrat2_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat3_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat4_2").modulate = Color(1,1,1)
+	elif strategieJ2 == Strat.Evolution:
+		VBoxStrat2.get_node("ChoixStrat1_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat2_2").modulate = Color(0.53, 0.81, 0.92)
+		VBoxStrat2.get_node("ChoixStrat3_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat4_2").modulate = Color(1,1,1)
+	elif strategieJ2 == Strat.Fuite:
+		VBoxStrat2.get_node("ChoixStrat1_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat2_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat3_2").modulate = Color(0.53, 0.81, 0.92)
+		VBoxStrat2.get_node("ChoixStrat4_2").modulate = Color(1,1,1)
+	elif strategieJ2 == Strat.ViveLeChef:
+		VBoxStrat2.get_node("ChoixStrat1_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat2_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat3_2").modulate = Color(1,1,1)
+		VBoxStrat2.get_node("ChoixStrat4_2").modulate = Color(0.53, 0.81, 0.92)
 		
 	
 	#Gérer les boutons d'ajout de troupe
@@ -126,6 +166,11 @@ func _process(delta):
 		VBoxStrat1.get_node("ChoixStrat3").disabled = true
 		VBoxStrat1.get_node("ChoixStrat4").disabled = true
 		
+		VBoxStrat2.get_node("ChoixStrat1_2").disabled = true
+		VBoxStrat2.get_node("ChoixStrat2_2").disabled = true
+		VBoxStrat2.get_node("ChoixStrat3_2").disabled = true
+		VBoxStrat2.get_node("ChoixStrat4_2").disabled = true
+		
 	else:
 		VBoxButtons1.get_node("AddFighter1").disabled = false
 		VBoxButtons1.get_node("AddChief1").disabled = false
@@ -143,11 +188,21 @@ func _process(delta):
 			VBoxStrat1.get_node("ChoixStrat2").disabled = true
 			VBoxStrat1.get_node("ChoixStrat3").disabled = false
 			VBoxStrat1.get_node("ChoixStrat4").disabled = false
+			
+			VBoxStrat2.get_node("ChoixStrat1_2").disabled = false
+			VBoxStrat2.get_node("ChoixStrat2_2").disabled = true
+			VBoxStrat2.get_node("ChoixStrat3_2").disabled = false
+			VBoxStrat2.get_node("ChoixStrat4_2").disabled = false
 		else:
 			VBoxStrat1.get_node("ChoixStrat1").disabled = true
 			VBoxStrat1.get_node("ChoixStrat2").disabled = true
 			VBoxStrat1.get_node("ChoixStrat3").disabled = true
 			VBoxStrat1.get_node("ChoixStrat4").disabled = true
+			
+			VBoxStrat2.get_node("ChoixStrat1_2").disabled = true
+			VBoxStrat2.get_node("ChoixStrat2_2").disabled = true
+			VBoxStrat2.get_node("ChoixStrat3_2").disabled = true
+			VBoxStrat2.get_node("ChoixStrat4_2").disabled = true
 			
 
 func _input(event):
@@ -172,33 +227,37 @@ func createFighter(team,type):
 	
 	#On définit ses stats selon son type
 	if type == 1: #Simple soldat
-		fighter1.hp = 30.0
-		fighter1.dmg = 1.0
-		fighter1.detectZoneRadius = 0.0
-		fighter1.distToFire = 3
-		fighter1.type = 1
-		fighter1.speed = 0.0
-	elif type == 2: #Chef
 		fighter1.hp = 3.0
+		fighter1.dmg = 2.0
+		fighter1.detectZoneRadius = 4.0
+		fighter1.distToFire = 1
+		fighter1.type = 1
+		fighter1.speed = 0.4
+		fighter1.fireRate = 1.0
+	elif type == 2: #Chef
+		fighter1.hp = 4.0
 		fighter1.dmg = 1.0
-		fighter1.detectZoneRadius = 30.0
-		fighter1.distToFire = 20
+		fighter1.detectZoneRadius = 15.0
+		fighter1.distToFire = 2
 		fighter1.type = 2
-		fighter1.speed = 0.5
+		fighter1.speed = 0.4
+		fighter1.fireRate = 1.0
 	elif type == 3: #Sorcier
 		fighter1.hp = 2.0
 		fighter1.dmg = 2.0
-		fighter1.detectZoneRadius = 1.0
-		fighter1.distToFire = 2
+		fighter1.detectZoneRadius = 12.0
+		fighter1.distToFire = 10
 		fighter1.type = 3
-		fighter1.speed = 0.5
+		fighter1.speed = 0.6
+		fighter1.fireRate = 1.5
 	elif type == 4: #Tank
-		fighter1.hp = 3.0
-		fighter1.dmg = 3.0
-		fighter1.detectZoneRadius = 25.0
-		fighter1.distToFire = 15
+		fighter1.hp = 7.0
+		fighter1.dmg = 2.0
+		fighter1.detectZoneRadius = 1.0
+		fighter1.distToFire = 1
 		fighter1.type = 4
-		fighter1.speed = 0.5
+		fighter1.speed = 0.2
+		fighter1.fireRate = 2.5
 	
 	# Décrémenter les jetons et positionner le combattant avant de l'ajouter
 	if team == 1: # Equipe 1
@@ -206,16 +265,24 @@ func createFighter(team,type):
 		nbFighters1+=1
 		
 		#On le positionne dans sa partie de la carte
-		fighter1.position.x = 10
-		fighter1.position.z = nbFighters1*1.5 + 10
+		# fighter1.position.x = 10
+		# fighter1.position.z = nbFighters1*1.5 + 10
+
+		# On le positionne à un endroit aléatoire dans sa partie de la carte
+		fighter1.position.x = randi_range(5, 15)
+		fighter1.position.z = randi_range(5, 45)
 			
 	if team == 2: # Equipe 2
 		jetons2-=type
 		nbFighters2+=1
 		
 		#On le positionne dans sa partie
-		fighter1.position.x = 40
-		fighter1.position.z = nbFighters2*1.5 + 10
+		# fighter1.position.x = 40
+		# fighter1.position.z = nbFighters2*1.5 + 10
+
+		# On le positionne à un endroit aléatoire dans sa partie de la carte
+		fighter1.position.x = randi_range(35, 45)
+		fighter1.position.z = randi_range(5, 45)
 		
 	fighter1.connect("dead", fighterDead)
 	get_node("Fighters").add_child(fighter1)
@@ -288,22 +355,46 @@ func _on_play_pressed():
 func _on_choix_strat_1_pressed():
 	strategieJ1 = Strat.AttaqueFrontale
 	stratChanged.emit(strategieJ1,1)
-	currentStrat = 1
+	currentStratJ1 = 1
 
 
 func _on_choix_strat_2_pressed():
 	strategieJ1 = Strat.Evolution
 	stratChanged.emit(strategieJ1,1)
-	currentStrat = 2
+	currentStratJ1 = 2
 
 
 func _on_choix_strat_3_pressed():
 	strategieJ1 = Strat.Fuite
 	stratChanged.emit(strategieJ1,1)
-	currentStrat = 3
+	currentStratJ1 = 3
 
 
 func _on_choix_strat_4_pressed():
 	strategieJ1 = Strat.ViveLeChef
 	stratChanged.emit(strategieJ1,1)
-	currentStrat = 4
+	currentStratJ1 = 4
+
+
+func _on_choix_strat_1_2_pressed():
+	strategieJ2 = Strat.AttaqueFrontale
+	stratChanged.emit(strategieJ2,2)
+	currentStratJ2 = 1
+
+
+func _on_choix_strat_2_2_pressed():
+	strategieJ2 = Strat.Evolution
+	stratChanged.emit(strategieJ2,2)
+	currentStratJ2 = 2
+
+
+func _on_choix_strat_3_2_pressed():
+	strategieJ2 = Strat.Fuite
+	stratChanged.emit(strategieJ2,2)
+	currentStratJ2 = 3
+
+
+func _on_choix_strat_4_2_pressed():
+	strategieJ2 = Strat.ViveLeChef
+	stratChanged.emit(strategieJ2,2)
+	currentStratJ2 = 4

@@ -21,7 +21,7 @@ var dmg:float
 var team:int
 var detectZoneRadius:float
 var type:int
-var fireRate:float = 2 # Nombre de coups par seconde
+var fireRate:float # Nombre de coups par seconde
 var distToFire:int # Distance minimal à laquelle le combattant peut tirer
 
 var target = null # cible du combattant
@@ -130,6 +130,8 @@ func _process(delta):
 			#On cherche à fuir en bougeant dans la direction opposée à la moyenne des ennemis qui nous ciblent, avec un angle pour éviter les projectiles
 			var meanDir = Vector3(0,0,0)
 			for enemy in targeted:
+				#TODO revoir la direction de fuite
+				#Bug parfois
 				meanDir += (global_position - enemy.global_position).normalized()
 			meanDir = meanDir/targeted.size()
 			direction = meanDir.normalized()*(speed*2)
@@ -140,6 +142,8 @@ func _process(delta):
 	if state == Etat.Exploring:
 		timer += delta
 		if timer > 1:
+			#TODO faire un déplacement amélioré
+			#Ils vont dans une direction d'abord générée aléatoirement, quand ils tombent sur un mur, ils changent de direction
 			randx = randi_range(-1,1)
 			randz = randi_range(-1,1)
 			direction = Vector3(randx*speed,0,randz*speed)
