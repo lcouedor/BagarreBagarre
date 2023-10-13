@@ -227,17 +227,17 @@ func createFighter(team,type):
 	
 	#On définit ses stats selon son type
 	if type == 1: #Simple soldat
-		fighter1.hp = 3.0
-		fighter1.dmg = 2.0
-		fighter1.detectZoneRadius = 4.0
-		fighter1.distToFire = 1
+		fighter1.hp = 2.0
+		fighter1.dmg = 1.0
+		fighter1.detectZoneRadius = 55.0
+		fighter1.distToFire = 2
 		fighter1.type = 1
 		fighter1.speed = 0.4
 		fighter1.fireRate = 1.0
 	elif type == 2: #Chef
 		fighter1.hp = 4.0
 		fighter1.dmg = 1.0
-		fighter1.detectZoneRadius = 15.0
+		fighter1.detectZoneRadius = 55.0
 		fighter1.distToFire = 2
 		fighter1.type = 2
 		fighter1.speed = 0.4

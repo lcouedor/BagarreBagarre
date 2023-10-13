@@ -48,6 +48,8 @@ func _ready():
 	var meshShapeArea = self.get_node("Area3D/MeshInstance3D").mesh.duplicate()
 	meshShapeArea.top_radius = detectZoneRadius
 	self.get_node("Area3D/MeshInstance3D").mesh = meshShapeArea
+	
+	change_direction() #Donner une direction initiale au combattant
 
 func setSkin():
 	var mesh = get_node("MeshInstance3D")
@@ -120,6 +122,7 @@ func _process(delta):
 		
 	if state == Etat.Escaping:
 		if len(targeted) == 0: #Si on s'est déciblé, on attaque un ennemi dans la zone si possible, sinon on explore
+			
 			if len(inAreaEnnemy) > 0:
 				target = inAreaEnnemy[0]
 				target.targetMe(self)
@@ -127,30 +130,12 @@ func _process(delta):
 			else:
 				state = Etat.Exploring
 		else:
-			#On cherche à fuir en bougeant dans la direction opposée à la moyenne des ennemis qui nous ciblent, avec un angle pour éviter les projectiles
-			var meanDir = Vector3(0,0,0)
-			for enemy in targeted:
-				#TODO revoir la direction de fuite
-				#Bug parfois
-				meanDir += (global_position - enemy.global_position).normalized()
-			meanDir = meanDir/targeted.size()
-			direction = meanDir.normalized()*(speed*2)
-			apply_central_impulse(direction)
+			apply_central_impulse(-direction*1.3)
 
 	
 	#Si le combattant n'a pas de cible, il explore
 	if state == Etat.Exploring:
 		timer += delta
-		if timer > 1:
-			#TODO faire un déplacement amélioré
-			#Ils vont dans une direction d'abord générée aléatoirement, quand ils tombent sur un mur, ils changent de direction
-			randx = randi_range(-1,1)
-			randz = randi_range(-1,1)
-			direction = Vector3(randx*speed,0,randz*speed)
-			#le personnage rotate pour regarder dans la direction où il va
-			look_at(global_position-direction, Vector3(0,1,0))
-			timer = 0
-			
 		apply_central_impulse(direction)
 		
 	#Si le combattant a une cible, il se dirige vers elle et l'attaque
@@ -186,6 +171,7 @@ func isDead():
 	for enemy in targeted:
 		#Le combattant actuel n'est plus dans leur zone, ni leur cible
 		#enemy.target = null
+		if !enemy: return
 		var tmpInZone = enemy.inAreaEnnemy
 		enemy.inAreaEnnemy = []
 		for enemy2 in tmpInZone:
@@ -232,6 +218,7 @@ func send_damage():
 	get_parent().add_child(particleInstance)
 	
 func receive_damage(damage):
+	print("test")
 	hp-=damage
 	if strat == 2 && len(targeted) > 0 && hp == 1: #On est en stratégie de Fuite, et on doit fuir
 		state = Etat.Escaping
@@ -274,3 +261,35 @@ func _on_area_3d_2_area_entered(area):
 		get_node("AudioStreamPlayer3D").playing = true
 		receive_damage(areaParent.get_meta("dmg"))
 		areaParent.queue_free()
+		
+func change_direction():
+	if state == Etat.Exploring || state == Etat.Escaping:
+		var valid_directions = []  # Stocke les directions valides pour le déplacement
+
+		# Génère les huit directions possibles (Nord, Sud, Est, Ouest et les diagonales)
+		var directions = [
+			Vector3(0, 0, -speed), 
+			Vector3(0, 0, speed), 
+			Vector3(-speed, 0, 0), 
+			Vector3(speed, 0, 0), 
+			Vector3(-speed, 0, -speed), 
+			Vector3(speed, 0, -speed), 
+			Vector3(-speed, 0, speed), 
+			Vector3(speed, 0, speed)
+		]
+
+		for direction_attempt in directions:
+			# Vérifie si la direction entraîne une collision avec un mur (ou sort de la zone de jeu, si nécessaire)
+			var new_position = global_transform.origin + direction_attempt
+			var collision_shape = move_and_collide(direction_attempt)
+
+			if not collision_shape:
+				# Si la direction n'entraîne pas de collision, elle est valide
+				valid_directions.append(direction_attempt)
+
+		if valid_directions.size() > 0:
+			# S'il y a des directions valides, choisissez-en une aléatoirement parmi celles-ci
+			direction = valid_directions[randi_range(0, valid_directions.size() - 1)]
+
+		# Faites en sorte que le personnage regarde dans la direction où il va
+		look_at(global_transform.origin - direction, Vector3(0, 1, 0))

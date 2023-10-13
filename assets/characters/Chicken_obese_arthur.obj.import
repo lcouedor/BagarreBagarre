@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bjouin53q202f"
+path="res://.godot/imported/Chicken_obese_arthur.obj-1f06d5784b1e05367b0a635657328881.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Chicken_obese_arthur.obj-1f06d5784b1e05367b0a635657328881.mesh"]
+
+source_file="res://assets/characters/Chicken_obese_arthur.obj"
+dest_files=["res://.godot/imported/Chicken_obese_arthur.obj-1f06d5784b1e05367b0a635657328881.mesh", "res://.godot/imported/Chicken_obese_arthur.obj-1f06d5784b1e05367b0a635657328881.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
