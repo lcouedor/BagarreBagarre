@@ -16,17 +16,13 @@ enum Etat{
 
 #Stats d'un combattant
 var speed:float
-var initSpeed:float
 var hp:float
 var initHp:float
 var dmg:float
-var initDmg:float
 var team:int
 var detectZoneRadius:float
-var initDetectZoneRadius:float
 var type:int
 var fireRate:float # Nombre de coups par seconde
-var initFireRate:float
 var distToFire:int # Distance minimal à laquelle le combattant peut tirer
 
 var target = null # cible du combattant
@@ -34,7 +30,7 @@ var targeted = [] # les ennemis ciblant le combattant
 var inAreaEnnemy = [] # Tous les combattants ennemis dans la zone
 var inAreaAlly = [] # Tous les combattants alliés dans la zone
 
-var strat = 1
+var strat
 
 var isPlaying = false
 var particle = preload("res://Particle.tscn")
@@ -55,12 +51,21 @@ func _ready():
 	self.get_node("Area3D/MeshInstance3D").mesh = meshShapeArea
 	
 	change_direction() #Donner une direction initiale au combattant
+
+
+	#Leurs dégats sont compris entre +20% et -20% de leur valeur initiale
+	dmg = dmg + randf()*dmg*0.4 - dmg*0.2
+
+	#Leurs vitesse est comprise entre +20% et -20% de leur valeur initiale
+	speed = speed + randf()*speed*0.4 - speed*0.2
+
+	#Leurs hp sont compris entre +20% et -20% de leur valeur initiale
+	hp = hp + randf()*hp*0.4 - hp*0.2
+
+	#Leurs vitesses de tir sont comprises entre +20% et -20% de leur valeur initiale
+	fireRate = fireRate + randf()*fireRate*0.4 - fireRate*0.2
+
 	initHp = hp
-	initDetectZoneRadius = detectZoneRadius
-	initDmg = dmg
-	initFireRate = fireRate
-	initSpeed = speed
-	
 
 func setSkin():
 	var mesh = get_node("MeshInstance3D")
@@ -119,17 +124,6 @@ func setSkin():
 
 # Appelé à chaque frame, delta est le temps écoulé depuis la dernière frame
 func _process(delta):
-	if strat == 1 : #On est en mode combat frontal
-		speed = initSpeed*2
-		dmg = initDmg*2
-		detectZoneRadius = initDetectZoneRadius*2
-		fireRate = initFireRate*2
-	else:
-		fireRate = initFireRate
-		detectZoneRadius = initDetectZoneRadius
-		dmg = initDmg
-		speed = initSpeed
-		
 
 	#Si le combattant n'a plus de vie, il meurt
 	if hp<=0:
@@ -142,7 +136,7 @@ func _process(delta):
 		
 	if state == Etat.Escaping:
 		if len(targeted) == 0: #Si on s'est déciblé, on attaque un ennemi dans la zone si possible, sinon on explore
-			hp+=initHp*0.2 #On regagne 20% des hp
+			hp+=10 #On regagne 10 hp
 			if len(inAreaEnnemy) > 0:
 				target = inAreaEnnemy[0]
 				target.targetMe(self)
@@ -155,12 +149,12 @@ func _process(delta):
 
 	
 	#Si le combattant n'a pas de cible, il explore
-	if state == Etat.Exploring:
+	elif state == Etat.Exploring:
 		timer += delta
 		apply_central_impulse(direction)
 		
 	#Si le combattant a une cible, il se dirige vers elle et l'attaque
-	if state == Etat.Fighting:
+	elif state == Etat.Fighting:
 		if type == 2 && strat == 3: #On est un chef et on est dans le mode ViveLeChef
 			#On parcours tous les alliés dans notre zone, s'ils n'ont pas de cible on leur attribue la notre
 			for ally in inAreaAlly:
@@ -170,6 +164,15 @@ func _process(delta):
 					target.targeted.append(ally)
 		
 		timer += delta
+		
+		if !target: #Si la cible n'existe plus, on cherche un autre ennemi dans la zone
+			if len(inAreaEnnemy) > 0:
+				target = inAreaEnnemy[0]
+				target.targetMe(self)
+				state = Etat.Fighting
+			else:
+				state = Etat.Exploring
+			return
 		
 		# Si on a atteint la cible, on passe en mode combat
 		if global_position.distance_to(target.global_position) <= distToFire:
@@ -185,6 +188,15 @@ func _process(delta):
 				look_at(global_position-direction, Vector3(0,1,0))
 				timer = 0
 			apply_central_impulse(direction)
+
+	#Si le combattant n'est dans aucun des états précédents, il regarde si il peut attaquer, sinon il explore
+	else:
+		if len(inAreaEnnemy) > 0:
+			target = inAreaEnnemy[0]
+			target.targetMe(self)
+			state = Etat.Fighting
+		else:
+			state = Etat.Exploring
 		
 
 func isDead():
@@ -240,7 +252,7 @@ func send_damage():
 	
 func receive_damage(damage):
 	hp-=damage
-	if strat == 2 && len(targeted) > 0 && hp < initHp*0.2: #On est en stratégie de Fuite, et on doit fuir
+	if strat == 2 && len(targeted) > 0 && hp < initHp*0.5: #On est en stratégie de Fuite, et on doit fuir
 		state = Etat.Escaping
 		target = null
 		

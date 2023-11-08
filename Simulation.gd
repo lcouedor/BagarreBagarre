@@ -47,8 +47,8 @@ func init():
 	for fighter in fighters:
 		fighter.queue_free()
 	# On remet les jetons et les combattants à leur état initial
-	jetons1 = 20
-	jetons2 = 20
+	jetons1 = 100
+	jetons2 = 100
 	nbFighters1 = 0
 	nbFighters2 = 0
 	# On remet les labels à jour
@@ -218,8 +218,8 @@ func _input(event):
 
 # Créer un combattant avec ses stats et infos
 func createFighter(team,type):
-	if team == 1 && jetons1 < type : return # Pas possible d'ajouter au joueur 1
-	if team == 2 && jetons2 < type : return # Pas possible d'ajouter au joueur 2
+	if team == 1 && jetons1 < getCoutJetons(type) : return # Pas possible d'ajouter au joueur 1
+	if team == 2 && jetons2 < getCoutJetons(type) : return # Pas possible d'ajouter au joueur 2
 	
 	#Sinon on peut ajouter le combattant
 	var fighter1 = fighter.instantiate()
@@ -230,7 +230,7 @@ func createFighter(team,type):
 		fighter1.hp = 20.0
 		fighter1.dmg = 5.0
 		fighter1.detectZoneRadius = 7.5
-		fighter1.detectZoneRadius = 70.5
+		fighter1.detectZoneRadius = 7.5
 		fighter1.distToFire = 2
 		fighter1.type = 1
 		fighter1.speed = 0.4
@@ -244,10 +244,10 @@ func createFighter(team,type):
 		fighter1.speed = 0.4
 		fighter1.fireRate = 1.0
 	elif type == 3: #Sorcier
-		fighter1.hp = 1500.0
+		fighter1.hp = 15.0
 		fighter1.dmg = 6.0
 		fighter1.detectZoneRadius = 12.0
-		fighter1.detectZoneRadius = 120.0
+		fighter1.detectZoneRadius = 12.0
 		fighter1.distToFire = 8
 		fighter1.type = 3
 		fighter1.speed = 0.8
@@ -263,7 +263,7 @@ func createFighter(team,type):
 	
 	# Décrémenter les jetons et positionner le combattant avant de l'ajouter
 	if team == 1: # Equipe 1
-		jetons1-=type
+		jetons1-=getCoutJetons(type)
 		nbFighters1+=1
 		
 		#On le positionne dans sa partie de la carte
@@ -275,7 +275,7 @@ func createFighter(team,type):
 		fighter1.position.z = randi_range(5, 45)
 			
 	if team == 2: # Equipe 2
-		jetons2-=type
+		jetons2-=getCoutJetons(type)
 		nbFighters2+=1
 		
 		#On le positionne dans sa partie
@@ -289,6 +289,12 @@ func createFighter(team,type):
 	fighter1.connect("dead", fighterDead)
 	get_node("Fighters").add_child(fighter1)
 
+func getCoutJetons(type):
+	if type == 1: return 5
+	if type == 2: return 12
+	if type == 3: return 8
+	if type == 4: return 15
+	
 
 func fighterDead(team):
 	if team == 1:
