@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://ccuttxeb3dsyw"]
+[gd_scene load_steps=76 format=3 uid="uid://ccuttxeb3dsyw"]
 
 [ext_resource type="ArrayMesh" uid="uid://cdu5w4mw36wmh" path="res://assets/environment/Nature/Tree1.obj" id="1_jh1gy"]
 [ext_resource type="ArrayMesh" uid="uid://ctbt8ucnux6hw" path="res://assets/environment/Mountains/Mountain_Group_1.obj" id="1_mxsau"]
@@ -15,9 +15,10 @@
 [ext_resource type="ArrayMesh" uid="uid://bd0662mjra5wi" path="res://assets/environment/Batiments/ChickenCoop.obj" id="10_tck5g"]
 [ext_resource type="ArrayMesh" uid="uid://d3dnwyj6tgf5q" path="res://assets/environment/Batiments/Windmill.obj" id="11_e107y"]
 [ext_resource type="ArrayMesh" uid="uid://40vcaqaotktw" path="res://assets/environment/Batiments/Well.obj" id="12_6cm63"]
-[ext_resource type="ArrayMesh" uid="uid://buq0fmjjmxpbt" path="res://assets/characters/Chicken.obj" id="13_udcej"]
 [ext_resource type="ArrayMesh" uid="uid://cj3uvpt50dgt5" path="res://assets/environment/Batiments/Farm_Dirt_Level3.obj" id="14_85jiv"]
 [ext_resource type="ArrayMesh" uid="uid://c4d6wvl0lwhhj" path="res://assets/environment/Batiments/Hospital.obj" id="15_c100t"]
+[ext_resource type="ArrayMesh" uid="uid://dw41f8baqjxcw" path="res://assets/characters/Chicken_arthur.obj" id="16_xicg3"]
+[ext_resource type="ArrayMesh" uid="uid://bjouin53q202f" path="res://assets/characters/Chicken_obese_arthur.obj" id="17_5ewv4"]
 [ext_resource type="ArrayMesh" uid="uid://bcviwulqaobek" path="res://assets/environment/road/Street_Straight.obj" id="17_mef6k"]
 [ext_resource type="ArrayMesh" uid="uid://bpvyf5uonrxfo" path="res://assets/environment/City/House1.obj" id="17_ptlfd"]
 [ext_resource type="ArrayMesh" uid="uid://cafoo7vqaetng" path="res://assets/environment/City/Building3_Big.obj" id="18_4o4mb"]
@@ -101,8 +102,23 @@ albedo_color = Color(0.690196, 1, 0.835294, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25a3r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7q5c2"]
-albedo_color = Color(1, 0.913725, 0.129412, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vo7me"]
+albedo_color = Color(1, 0.278431, 0.380392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpq03"]
+albedo_color = Color(0.686275, 0.494118, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x8gwx"]
+albedo_color = Color(1, 0.278431, 0.380392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlu5v"]
+albedo_color = Color(0.686275, 0.494118, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cwvi"]
+albedo_color = Color(1, 0.780392, 0.380392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qa62q"]
+albedo_color = Color(0.556863, 0.396078, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkqe6"]
 albedo_color = Color(0.45098, 0.309804, 0.313726, 1)
@@ -2101,33 +2117,129 @@ surface_material_override/3 = SubResource("StandardMaterial3D_tk21c")
 
 [node name="MeshInstance3D22" type="MeshInstance3D" parent="Décors/BatimentsFerme"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -25.1095, 0, 8.78415)
-mesh = ExtResource("13_udcej")
-surface_material_override/0 = SubResource("StandardMaterial3D_7q5c2")
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/1 = SubResource("StandardMaterial3D_lpq03")
+surface_material_override/2 = SubResource("StandardMaterial3D_vo7me")
 
 [node name="MeshInstance3D23" type="MeshInstance3D" parent="Décors/BatimentsFerme"]
 transform = Transform3D(0.944055, 0, -1.76317, 0, 2, 0, 1.76317, 0, 0.944055, -25.1095, 0, 13.4829)
-mesh = ExtResource("13_udcej")
-surface_material_override/0 = SubResource("StandardMaterial3D_7q5c2")
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/1 = SubResource("StandardMaterial3D_lpq03")
+surface_material_override/2 = SubResource("StandardMaterial3D_vo7me")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Décors/BatimentsFerme/MeshInstance3D23"]
+transform = Transform3D(1, 3.66256e-09, -3.22582e-11, 1.5246e-23, 0.000767982, 1, 3.36692e-09, -1, 0.000767984, 0.91066, -0.0242718, -1.01662)
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/1 = SubResource("StandardMaterial3D_hlu5v")
+surface_material_override/2 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/3 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/4 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/5 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/6 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/7 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/8 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/9 = SubResource("StandardMaterial3D_qa62q")
 
 [node name="MeshInstance3D24" type="MeshInstance3D" parent="Décors/BatimentsFerme"]
 transform = Transform3D(1.69133, 0, 1.06744, 0, 2, 0, -1.06744, 0, 1.69133, -15.9846, 0, 13.4829)
-mesh = ExtResource("13_udcej")
-surface_material_override/0 = SubResource("StandardMaterial3D_7q5c2")
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/1 = SubResource("StandardMaterial3D_lpq03")
+surface_material_override/2 = SubResource("StandardMaterial3D_vo7me")
 
 [node name="MeshInstance3D25" type="MeshInstance3D" parent="Décors/BatimentsFerme"]
 transform = Transform3D(1.69133, 0, 1.06744, 0, 2, 0, -1.06744, 0, 1.69133, -42.7315, 0, 13.4829)
-mesh = ExtResource("13_udcej")
-surface_material_override/0 = SubResource("StandardMaterial3D_7q5c2")
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/1 = SubResource("StandardMaterial3D_lpq03")
+surface_material_override/2 = SubResource("StandardMaterial3D_vo7me")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Décors/BatimentsFerme/MeshInstance3D25"]
+transform = Transform3D(0.913211, 0.13817, -0.383347, -0.0528823, 0.972988, 0.224718, 0.404041, -0.184943, 0.89585, 4.89718, -0.0242718, 0.283532)
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/1 = SubResource("StandardMaterial3D_hlu5v")
+surface_material_override/2 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/3 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/4 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/5 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/6 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/7 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/8 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/9 = SubResource("StandardMaterial3D_qa62q")
 
 [node name="MeshInstance3D26" type="MeshInstance3D" parent="Décors/BatimentsFerme"]
 transform = Transform3D(-0.357776, 0, 1.96774, 0, 2, 0, -1.96774, 0, -0.357776, -42.7315, 0, 18.7233)
-mesh = ExtResource("13_udcej")
-surface_material_override/0 = SubResource("StandardMaterial3D_7q5c2")
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/1 = SubResource("StandardMaterial3D_lpq03")
+surface_material_override/2 = SubResource("StandardMaterial3D_vo7me")
 
 [node name="MeshInstance3D27" type="MeshInstance3D" parent="Décors/BatimentsFerme"]
 transform = Transform3D(0.0282068, -0.384877, 1.96242, -1.99444, 0.138261, 0.0557831, -0.146398, -1.95774, -0.381857, -31.5966, 0, 18.7233)
-mesh = ExtResource("13_udcej")
-surface_material_override/0 = SubResource("StandardMaterial3D_7q5c2")
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/1 = SubResource("StandardMaterial3D_lpq03")
+surface_material_override/2 = SubResource("StandardMaterial3D_vo7me")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Décors/BatimentsFerme/MeshInstance3D27"]
+transform = Transform3D(0.258915, -0.957044, -0.130499, 0.238007, -0.0677261, 0.968899, -0.936117, -0.281922, 0.210248, 0.413167, -1.39693, 0.409039)
+mesh = ExtResource("16_xicg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/1 = SubResource("StandardMaterial3D_hlu5v")
+surface_material_override/2 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/3 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/4 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/5 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/6 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/7 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/8 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/9 = SubResource("StandardMaterial3D_qa62q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Décors/BatimentsFerme/MeshInstance3D27/MeshInstance3D"]
+transform = Transform3D(0.910977, -0.253538, 0.32533, 0.28956, 0.954834, -0.0666917, -0.293727, 0.154957, 0.943246, -5.00961, -1.4692, 0.778056)
+mesh = ExtResource("17_5ewv4")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/1 = SubResource("StandardMaterial3D_hlu5v")
+surface_material_override/2 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/3 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/4 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/5 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/6 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/7 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/8 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/9 = SubResource("StandardMaterial3D_qa62q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Décors/BatimentsFerme/MeshInstance3D27/MeshInstance3D/MeshInstance3D"]
+transform = Transform3D(0.917735, -0.231, 0.323111, 0.243106, 0.969995, 0.00297679, -0.314104, 0.0758185, 0.946356, -1.73004, 0.0768545, 1.79882)
+mesh = ExtResource("17_5ewv4")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/1 = SubResource("StandardMaterial3D_hlu5v")
+surface_material_override/2 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/3 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/4 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/5 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/6 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/7 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/8 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/9 = SubResource("StandardMaterial3D_qa62q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Décors/BatimentsFerme/MeshInstance3D27/MeshInstance3D/MeshInstance3D"]
+transform = Transform3D(-0.06598, -0.0535842, -0.996382, 0.206541, 0.976198, -0.0661758, 0.976211, -0.210159, -0.0533422, 9.60391, 0.13324, 6.54099)
+mesh = ExtResource("17_5ewv4")
+surface_material_override/0 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/1 = SubResource("StandardMaterial3D_hlu5v")
+surface_material_override/2 = SubResource("StandardMaterial3D_x8gwx")
+surface_material_override/3 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/4 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/5 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/6 = SubResource("StandardMaterial3D_2cwvi")
+surface_material_override/7 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/8 = SubResource("StandardMaterial3D_qa62q")
+surface_material_override/9 = SubResource("StandardMaterial3D_qa62q")
 
 [node name="MeshInstance3D28" type="MeshInstance3D" parent="Décors/BatimentsFerme"]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -91.177, 0, -13.5755)
