@@ -1,12 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://duivojer4x558"]
+[gd_scene load_steps=9 format=3 uid="uid://duivojer4x558"]
 
 [ext_resource type="Script" path="res://Particle.gd" id="1_mxudj"]
-[ext_resource type="ArrayMesh" uid="uid://buq0fmjjmxpbt" path="res://assets/characters/Chicken.obj" id="2_p4v4r"]
+[ext_resource type="ArrayMesh" uid="uid://dw41f8baqjxcw" path="res://assets/characters/Chicken_arthur.obj" id="2_rclny"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_itxy7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vo7me"]
-albedo_color = Color(1, 0.729412, 0.380392, 1)
+albedo_color = Color(1, 0.278431, 0.380392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpq03"]
+albedo_color = Color(0.686275, 0.494118, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_864dl"]
+albedo_color = Color(1, 0.780392, 0.380392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gq1dw"]
+albedo_color = Color(0.556863, 0.396078, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nvig8"]
 
@@ -23,8 +32,17 @@ shape = SubResource("BoxShape3D_itxy7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(1, -1.5246e-23, -1.52343e-23, 1.5246e-23, 0.000767982, 1, -1.52343e-23, -1, 0.000767984, 1.0431e-23, -0.0242718, 0.684178)
-mesh = ExtResource("2_p4v4r")
+mesh = ExtResource("2_rclny")
 surface_material_override/0 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/1 = SubResource("StandardMaterial3D_lpq03")
+surface_material_override/2 = SubResource("StandardMaterial3D_vo7me")
+surface_material_override/3 = SubResource("StandardMaterial3D_864dl")
+surface_material_override/4 = SubResource("StandardMaterial3D_gq1dw")
+surface_material_override/5 = SubResource("StandardMaterial3D_gq1dw")
+surface_material_override/6 = SubResource("StandardMaterial3D_864dl")
+surface_material_override/7 = SubResource("StandardMaterial3D_gq1dw")
+surface_material_override/8 = SubResource("StandardMaterial3D_gq1dw")
+surface_material_override/9 = SubResource("StandardMaterial3D_gq1dw")
 
 [node name="Area3D" type="Area3D" parent="CollisionShape3D"]
 transform = Transform3D(1, 0, 2.91303e-38, 0, 1, 0, 0, 0, 1, 0, 0, 0)
