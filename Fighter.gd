@@ -16,12 +16,17 @@ enum Etat{
 
 #Stats d'un combattant
 var speed:float
+var initSpeed:float
 var hp:float
+var initHp:float
 var dmg:float
+var initDmg:float
 var team:int
 var detectZoneRadius:float
+var initDetectZoneRadius:float
 var type:int
 var fireRate:float # Nombre de coups par seconde
+var initFireRate:float
 var distToFire:int # Distance minimal à laquelle le combattant peut tirer
 
 var target = null # cible du combattant
@@ -29,7 +34,7 @@ var targeted = [] # les ennemis ciblant le combattant
 var inAreaEnnemy = [] # Tous les combattants ennemis dans la zone
 var inAreaAlly = [] # Tous les combattants alliés dans la zone
 
-var strat
+var strat = 1
 
 var isPlaying = false
 var particle = preload("res://Particle.tscn")
@@ -50,45 +55,36 @@ func _ready():
 	self.get_node("Area3D/MeshInstance3D").mesh = meshShapeArea
 	
 	change_direction() #Donner une direction initiale au combattant
+	initHp = hp
+	initDetectZoneRadius = detectZoneRadius
+	initDmg = dmg
+	initFireRate = fireRate
+	initSpeed = speed
+	
 
 func setSkin():
 	var mesh = get_node("MeshInstance3D")
-	#Selon son type, on choisit un skin différent
+	#Selon son type, on choisit un skin différent, avec une proba de 1/2 que ça soit le skin homme ou femme
 	if type == 1:
 		if randi()%2 == 0:
 			mesh.mesh = preload("res://assets/characters/Worker_Female.obj")
 		else:
 			mesh.mesh = preload("res://assets/characters/Worker_Male.obj")
-		
-		"""
-		var newMat = mesh.get_surface_material(0).duplicate()#Couleur de peau
-		newMat.albedo_color = Color(1,0.729,0.729)
-		mesh.set_surface_override_material(0, newMat) 
-		if team == 1:
-			newMat = mesh.get_surface_material(2).duplicate()#Couleur de l'uniforme
-			newMat.albedo_color = Color.BLUE
-			mesh.set_surface_override_material(2, newMat) 
-			
-			newMat = mesh.get_surface_material(4).duplicate()#Couleur du casque
-			newMat.albedo_color = Color.BLUE
-			mesh.set_surface_override_material(4, newMat)
-		
-		
-		else:
-			newMat = mesh.get_surface_material(2).duplicate()#Couleur de l'uniforme
-			newMat.albedo_color = Color.RED
-			mesh.set_surface_override_material(2, newMat) 
-			
-			newMat = mesh.get_surface_material(4).duplicate()#Couleur du casque
-			newMat.albedo_color = Color.RED
-			mesh.set_surface_override_material(4, newMat)
-		"""
 
 	if type == 2:
 		if randi()%2 == 0:
 			mesh.mesh = preload("res://assets/characters/Chef_Female.obj")
 		else:
 			mesh.mesh = preload("res://assets/characters/Chef_Male.obj")
+			
+		# On définit un surface override material au slot 4, qui est la couleur du casque
+		var newMat = mesh.get_surface_override_material(5).duplicate()
+		if team == 1:
+			newMat.albedo_color = Color.BLUE
+		else:
+			newMat.albedo_color = Color.RED
+
+		mesh.set_surface_override_material(5, newMat)
 
 	if type == 3:
 		if randi()%2 == 0:
@@ -101,15 +97,39 @@ func setSkin():
 			mesh.mesh = preload("res://assets/characters/Viking_Female.obj")
 		else:
 			mesh.mesh = preload("res://assets/characters/Viking_Male.obj")
+			
+	if type == 1 || type == 3 || type == 4:
+		# On définit un surface override material au slot 4
+		var newMat = mesh.get_surface_override_material(4).duplicate()
+		if team == 1:
+			newMat.albedo_color = Color.BLUE
+		else:
+			newMat.albedo_color = Color.RED
 
+		mesh.set_surface_override_material(4, newMat)
 			
-			
-		#var redMat = mesh.get_surface_override_material(1).duplicate()
-		#redMat.albedo_color = Color.RED
-		#mesh.set_surface_override_material(1, redMat)
+	# On définit un surface override material au slot 0, qui est la couleur de peau
+	var newMat = mesh.get_surface_override_material(0).duplicate()
+	if randi()%2 == 0:
+		newMat.albedo_color = Color.BURLYWOOD
+	else:
+		newMat.albedo_color = Color.BLACK
+	mesh.set_surface_override_material(0, newMat)
+
 
 # Appelé à chaque frame, delta est le temps écoulé depuis la dernière frame
 func _process(delta):
+	if strat == 1 : #On est en mode combat frontal
+		speed = initSpeed*2
+		dmg = initDmg*2
+		detectZoneRadius = initDetectZoneRadius*2
+		fireRate = initFireRate*2
+	else:
+		fireRate = initFireRate
+		detectZoneRadius = initDetectZoneRadius
+		dmg = initDmg
+		speed = initSpeed
+		
 
 	#Si le combattant n'a plus de vie, il meurt
 	if hp<=0:
@@ -122,7 +142,7 @@ func _process(delta):
 		
 	if state == Etat.Escaping:
 		if len(targeted) == 0: #Si on s'est déciblé, on attaque un ennemi dans la zone si possible, sinon on explore
-			
+			hp+=initHp*0.2 #On regagne 20% des hp
 			if len(inAreaEnnemy) > 0:
 				target = inAreaEnnemy[0]
 				target.targetMe(self)
@@ -130,6 +150,7 @@ func _process(delta):
 			else:
 				state = Etat.Exploring
 		else:
+			#On se déplace dans la direction opposée à la cible plus rapidement que d'habitude
 			apply_central_impulse(-direction*1.3)
 
 	
@@ -218,9 +239,8 @@ func send_damage():
 	get_parent().add_child(particleInstance)
 	
 func receive_damage(damage):
-	print("test")
 	hp-=damage
-	if strat == 2 && len(targeted) > 0 && hp == 1: #On est en stratégie de Fuite, et on doit fuir
+	if strat == 2 && len(targeted) > 0 && hp < initHp*0.2: #On est en stratégie de Fuite, et on doit fuir
 		state = Etat.Escaping
 		target = null
 		

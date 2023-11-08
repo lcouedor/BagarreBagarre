@@ -227,37 +227,39 @@ func createFighter(team,type):
 	
 	#On définit ses stats selon son type
 	if type == 1: #Simple soldat
-		fighter1.hp = 2.0
-		fighter1.dmg = 1.0
-		fighter1.detectZoneRadius = 55.0
+		fighter1.hp = 20.0
+		fighter1.dmg = 5.0
+		fighter1.detectZoneRadius = 7.5
+		fighter1.detectZoneRadius = 70.5
 		fighter1.distToFire = 2
 		fighter1.type = 1
 		fighter1.speed = 0.4
 		fighter1.fireRate = 1.0
 	elif type == 2: #Chef
-		fighter1.hp = 4.0
-		fighter1.dmg = 1.0
-		fighter1.detectZoneRadius = 55.0
+		fighter1.hp = 35.0
+		fighter1.dmg = 5.0
+		fighter1.detectZoneRadius = 12.0
 		fighter1.distToFire = 2
 		fighter1.type = 2
 		fighter1.speed = 0.4
 		fighter1.fireRate = 1.0
 	elif type == 3: #Sorcier
-		fighter1.hp = 2.0
-		fighter1.dmg = 2.0
+		fighter1.hp = 1500.0
+		fighter1.dmg = 6.0
 		fighter1.detectZoneRadius = 12.0
-		fighter1.distToFire = 10
+		fighter1.detectZoneRadius = 120.0
+		fighter1.distToFire = 8
 		fighter1.type = 3
-		fighter1.speed = 0.6
+		fighter1.speed = 0.8
 		fighter1.fireRate = 1.5
 	elif type == 4: #Tank
-		fighter1.hp = 7.0
-		fighter1.dmg = 2.0
-		fighter1.detectZoneRadius = 1.0
+		fighter1.hp = 100.0
+		fighter1.dmg = 15.0
+		fighter1.detectZoneRadius = 2.0
 		fighter1.distToFire = 1
 		fighter1.type = 4
 		fighter1.speed = 0.2
-		fighter1.fireRate = 2.5
+		fighter1.fireRate = 0.5
 	
 	# Décrémenter les jetons et positionner le combattant avant de l'ajouter
 	if team == 1: # Equipe 1
