@@ -62,7 +62,6 @@ monitorable = false
 shape = SubResource("CylinderShape3D_xl5u0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-visible = false
 mesh = SubResource("CylinderMesh_qgvfe")
 surface_material_override/0 = SubResource("StandardMaterial3D_ic0ll")
 

@@ -153,6 +153,12 @@ func _process(delta):
 		timer += delta
 		apply_central_impulse(direction)
 		
+		if len(inAreaEnnemy) > 0:
+			target = inAreaEnnemy[0]
+			target.targetMe(self)
+			state = Etat.Fighting
+		
+		
 	#Si le combattant a une cible, il se dirige vers elle et l'attaque
 	elif state == Etat.Fighting:
 		if type == 2 && strat == 3: #On est un chef et on est dans le mode ViveLeChef

@@ -47,8 +47,8 @@ func init():
 	for fighter in fighters:
 		fighter.queue_free()
 	# On remet les jetons et les combattants à leur état initial
-	jetons1 = 100
-	jetons2 = 100
+	jetons1 = 80
+	jetons2 = 80
 	nbFighters1 = 0
 	nbFighters2 = 0
 	# On remet les labels à jour
@@ -236,9 +236,9 @@ func createFighter(team,type):
 		fighter1.speed = 0.4
 		fighter1.fireRate = 1.0
 	elif type == 2: #Chef
-		fighter1.hp = 35.0
-		fighter1.dmg = 5.0
-		fighter1.detectZoneRadius = 12.0
+		fighter1.hp = 50.0
+		fighter1.dmg = 3.0
+		fighter1.detectZoneRadius = 15.0
 		fighter1.distToFire = 2
 		fighter1.type = 2
 		fighter1.speed = 0.4
@@ -253,13 +253,13 @@ func createFighter(team,type):
 		fighter1.speed = 0.8
 		fighter1.fireRate = 1.5
 	elif type == 4: #Tank
-		fighter1.hp = 100.0
-		fighter1.dmg = 15.0
+		fighter1.hp = 120.0
+		fighter1.dmg = 18.0
 		fighter1.detectZoneRadius = 2.0
-		fighter1.distToFire = 1
+		fighter1.distToFire = 6
 		fighter1.type = 4
-		fighter1.speed = 0.2
-		fighter1.fireRate = 0.5
+		fighter1.speed = 0.4
+		fighter1.fireRate = 0.6
 	
 	# Décrémenter les jetons et positionner le combattant avant de l'ajouter
 	if team == 1: # Equipe 1
@@ -290,10 +290,10 @@ func createFighter(team,type):
 	get_node("Fighters").add_child(fighter1)
 
 func getCoutJetons(type):
-	if type == 1: return 5
-	if type == 2: return 12
-	if type == 3: return 8
-	if type == 4: return 15
+	if type == 1: return 1
+	if type == 2: return 3
+	if type == 3: return 5
+	if type == 4: return 7
 	
 
 func fighterDead(team):
